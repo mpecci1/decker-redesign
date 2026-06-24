@@ -470,14 +470,26 @@ textarea { resize: vertical; min-height: 120px; }
 .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-top: 2rem; }
 .cat-item {
   border: 1px solid var(--concrete-2); border-radius: var(--r);
-  padding: 1.15rem 1.2rem 1.25rem; background: var(--white);
-  display: flex; flex-direction: column; gap: .5rem;
+  background: var(--white); overflow: hidden;
+  display: flex; flex-direction: column;
   transition: border-color .15s var(--ease), box-shadow .15s var(--ease), transform .15s var(--ease);
 }
 .cat-item:hover { border-color: var(--ink); box-shadow: var(--shadow); transform: translateY(-3px); }
+.cat-item__thumb {
+  height: 158px; background: #fff; display: grid; place-items: center;
+  border-bottom: 1px solid var(--concrete-2); position: relative; overflow: hidden;
+}
+.cat-item__thumb img { max-width: 100%; max-height: 100%; object-fit: contain; padding: 10px; }
+.cat-item__thumb.noimg { background: var(--concrete); }
+.cat-item__thumb.noimg::after {
+  content: ""; width: 40px; height: 40px; border-radius: 50%;
+  border: 4px solid rgba(209,36,43,.25);
+  background: radial-gradient(circle, rgba(209,36,43,.25) 0 5px, transparent 6px);
+}
+.cat-item__body { padding: 1rem 1.1rem 1.15rem; display: flex; flex-direction: column; gap: .4rem; flex: 1; }
 .cat-item__code { font-family: var(--font-mono); font-weight: 600; font-size: .82rem; color: var(--red); letter-spacing: .04em; }
-.cat-item__name { font-weight: 600; font-size: .98rem; line-height: 1.35; color: var(--ink); }
-.cat-item__sect { margin-top: auto; font-family: var(--font-mono); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--steel-2); }
+.cat-item__name { font-weight: 600; font-size: .95rem; line-height: 1.35; color: var(--ink); }
+.cat-item__sect { margin-top: auto; padding-top: .3rem; font-family: var(--font-mono); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--steel-2); }
 .catalog-empty { text-align: center; padding: 3rem 1rem; color: var(--steel); }
 .catalog-note { margin-top: 2.5rem; font-size: .74rem; letter-spacing: .04em; color: var(--steel); text-align: center; }
 .catalog-note a { color: var(--red); }

@@ -116,9 +116,14 @@
       if (reset) { grid.innerHTML = ''; shown = 0; }
       var slice = matches.slice(shown, shown + PAGE);
       var html = slice.map(function (p) {
-        return '<article class="cat-item"><span class="cat-item__code">' + esc(p.code) +
+        var thumb = p.img
+          ? '<div class="cat-item__thumb"><img src="images/products/' + esc(p.img) + '" alt="' + esc(p.disp) +
+            '" loading="lazy" decoding="async" onerror="this.parentNode.classList.add(\'noimg\');this.remove();"></div>'
+          : '<div class="cat-item__thumb noimg"></div>';
+        return '<article class="cat-item">' + thumb +
+          '<div class="cat-item__body"><span class="cat-item__code">' + esc(p.code) +
           '</span><span class="cat-item__name">' + esc(p.disp) +
-          '</span><span class="cat-item__sect">' + esc(p.sect) + '</span></article>';
+          '</span><span class="cat-item__sect">' + esc(p.sect) + '</span></div></article>';
       }).join('');
       grid.insertAdjacentHTML('beforeend', html);
       shown += slice.length;
@@ -143,7 +148,7 @@
         // strip leading "CODE - " from the name for a cleaner display label
         var disp = (p.name || '').replace(/^[A-Z0-9./-]+\s*[-–]\s*/i, '').trim() || p.name;
         var sect = sectionOf(p);
-        return { code: p.code, disp: disp, sect: sect, hay: (p.code + ' ' + p.name).toLowerCase() };
+        return { code: p.code, disp: disp, sect: sect, img: p.img || '', hay: (p.code + ' ' + p.name).toLowerCase() };
       });
       // build filter buttons with counts
       filters.innerHTML = SECTIONS.map(function (s) {
