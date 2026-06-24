@@ -99,7 +99,7 @@
     var countEl = document.getElementById('cat-count');
     var moreBtn = document.getElementById('cat-more');
     var PAGE = 48;
-    var data = [], active = 'All', shown = 0, matches = [];
+    var data = [], active = 'All', shown = 0, matches = [], sprites = null;
 
     var sectionOf = function (p) {
       var c = ((p.cats || []).join(' ') + ' ' + p.name).toLowerCase();
@@ -116,10 +116,17 @@
       if (reset) { grid.innerHTML = ''; shown = 0; }
       var slice = matches.slice(shown, shown + PAGE);
       var html = slice.map(function (p) {
-        var thumb = p.img
-          ? '<div class="cat-item__thumb"><img src="images/products/' + esc(p.img) + '" alt="' + esc(p.disp) +
-            '" loading="lazy" decoding="async" onerror="this.parentNode.classList.add(\'noimg\');this.remove();"></div>'
-          : '<div class="cat-item__thumb noimg"></div>';
+        var thumb;
+        if (p.sp && sprites && sprites[p.sp[0]]) {
+          var sh = sprites[p.sp[0]], c = p.sp[1], r = p.sp[2];
+          var bx = sh.cols > 1 ? (c / (sh.cols - 1) * 100) : 0;
+          var by = sh.rows > 1 ? (r / (sh.rows - 1) * 100) : 0;
+          thumb = '<div class="cat-item__thumb sprite" role="img" aria-label="' + esc(p.disp) +
+            '" style="background-image:url(' + sh.src + ');background-size:' + (sh.cols * 100) + '% ' +
+            (sh.rows * 100) + '%;background-position:' + bx.toFixed(3) + '% ' + by.toFixed(3) + '%"></div>';
+        } else {
+          thumb = '<div class="cat-item__thumb noimg"></div>';
+        }
         return '<article class="cat-item">' + thumb +
           '<div class="cat-item__body"><span class="cat-item__code">' + esc(p.code) +
           '</span><span class="cat-item__name">' + esc(p.disp) +
@@ -144,11 +151,12 @@
     };
 
     fetch('catalog.json').then(function (r) { return r.json(); }).then(function (json) {
-      data = json.map(function (p) {
+      sprites = json.sprites || null;
+      data = (json.products || json).map(function (p) {
         // strip leading "CODE - " from the name for a cleaner display label
         var disp = (p.name || '').replace(/^[A-Z0-9./-]+\s*[-–]\s*/i, '').trim() || p.name;
         var sect = sectionOf(p);
-        return { code: p.code, disp: disp, sect: sect, img: p.img || '', hay: (p.code + ' ' + p.name).toLowerCase() };
+        return { code: p.code, disp: disp, sect: sect, sp: p.sp || null, hay: (p.code + ' ' + p.name).toLowerCase() };
       });
       // build filter buttons with counts
       filters.innerHTML = SECTIONS.map(function (s) {
