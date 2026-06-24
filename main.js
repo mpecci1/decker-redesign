@@ -99,7 +99,7 @@
     var countEl = document.getElementById('cat-count');
     var moreBtn = document.getElementById('cat-more');
     var PAGE = 48;
-    var data = [], active = 'All', shown = 0, matches = [], sprite = null;
+    var data = [], active = 'All', shown = 0, matches = [];
 
     var sectionOf = function (p) {
       var c = ((p.cats || []).join(' ') + ' ' + p.name).toLowerCase();
@@ -116,16 +116,10 @@
       if (reset) { grid.innerHTML = ''; shown = 0; }
       var slice = matches.slice(shown, shown + PAGE);
       var html = slice.map(function (p) {
-        var thumb;
-        if (p.sp && sprite) {
-          var col = p.sp[0], row = p.sp[1];
-          var px = sprite.cols > 1 ? (col / (sprite.cols - 1) * 100) : 0;
-          var py = sprite.rows > 1 ? (row / (sprite.rows - 1) * 100) : 0;
-          thumb = '<div class="cat-item__thumb sprite" role="img" aria-label="' + esc(p.disp) +
-            '" style="background-position:' + px.toFixed(3) + '% ' + py.toFixed(3) + '%"></div>';
-        } else {
-          thumb = '<div class="cat-item__thumb noimg"></div>';
-        }
+        var thumb = p.img
+          ? '<div class="cat-item__thumb"><img src="images/products/' + esc(p.img) + '" alt="' + esc(p.disp) +
+            '" loading="lazy" decoding="async" onerror="this.parentNode.classList.add(\'noimg\');this.remove();"></div>'
+          : '<div class="cat-item__thumb noimg"></div>';
         return '<article class="cat-item">' + thumb +
           '<div class="cat-item__body"><span class="cat-item__code">' + esc(p.code) +
           '</span><span class="cat-item__name">' + esc(p.disp) +
@@ -150,19 +144,11 @@
     };
 
     fetch('catalog.json').then(function (r) { return r.json(); }).then(function (json) {
-      sprite = json.sprite || null;
-      if (sprite) {
-        // set the shared sprite image + size once via a style rule
-        var st = document.createElement('style');
-        st.textContent = '.cat-item__thumb.sprite{background-image:url(' + sprite.src +
-          ');background-size:' + (sprite.cols * 100) + '% ' + (sprite.rows * 100) + '%;}';
-        document.head.appendChild(st);
-      }
-      data = (json.products || json).map(function (p) {
+      data = json.map(function (p) {
         // strip leading "CODE - " from the name for a cleaner display label
         var disp = (p.name || '').replace(/^[A-Z0-9./-]+\s*[-–]\s*/i, '').trim() || p.name;
         var sect = sectionOf(p);
-        return { code: p.code, disp: disp, sect: sect, sp: p.sp || null, hay: (p.code + ' ' + p.name).toLowerCase() };
+        return { code: p.code, disp: disp, sect: sect, img: p.img || '', hay: (p.code + ' ' + p.name).toLowerCase() };
       });
       // build filter buttons with counts
       filters.innerHTML = SECTIONS.map(function (s) {
