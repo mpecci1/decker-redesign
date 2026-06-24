@@ -1,0 +1,5 @@
+# DEMO / pitch deployment — not the official deckertape.com.
+# Disallow all crawling so this concept never appears in search results.
+# For a real launch on the live domain, restore "Allow: /" and the Sitemap line.
+User-agent: *
+Disallow: /

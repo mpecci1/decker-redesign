@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-label="End view of a tape roll">
+  <defs>
+    <radialGradient id="core" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3A3436"/>
+      <stop offset="100%" stop-color="#262223"/>
+    </radialGradient>
+  </defs>
+  <g fill="none" stroke="#262223" stroke-width="1.4" opacity="0.9">
+    <circle cx="160" cy="160" r="150"/>
+    <circle cx="160" cy="160" r="139"/>
+    <circle cx="160" cy="160" r="128"/>
+    <circle cx="160" cy="160" r="117"/>
+    <circle cx="160" cy="160" r="106"/>
+    <circle cx="160" cy="160" r="95"/>
+  </g>
+  <circle cx="160" cy="160" r="150" fill="none" stroke="#D1242B" stroke-width="6"/>
+  <circle cx="160" cy="160" r="88" fill="url(#core)"/>
+  <circle cx="160" cy="160" r="84" fill="none" stroke="#D1242B" stroke-width="2.5" opacity="0.85"/>
+  <circle cx="160" cy="160" r="60" fill="#1A1718"/>
+  <!-- lifted tape end -->
+  <path d="M310 160 q34 6 52 30 q-30 10 -56 -2 z" fill="#D1242B"/>
+  <path d="M310 160 q34 6 52 30" fill="none" stroke="#B51E24" stroke-width="2"/>
+</svg>

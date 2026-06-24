@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found | Decker Tape Products</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@700;800&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .err { min-height: 78vh; display: grid; place-items: center; text-align: center; background: var(--ink); color: var(--white); position: relative; overflow: hidden; }
+  .err::before { content:""; position:absolute; inset:0; background: repeating-linear-gradient(135deg, rgba(254,253,253,.035) 0 2px, transparent 2px 26px); }
+  .err__in { position: relative; padding: 3rem 1.5rem; }
+  .err h1 { font-size: clamp(4rem, 16vw, 9rem); }
+  .err h1 .red { color: var(--red); }
+  .err p { color: rgba(254,253,253,.78); margin: 1rem auto 2rem; max-width: 44ch; }
+</style>
+</head>
+<body>
+<section class="err">
+  <div class="err__in">
+    <span class="eyebrow eyebrow--light" style="justify-content:center;">Lost the thread</span>
+    <h1>4<span class="red">0</span>4</h1>
+    <p>That roll came off the spool. The page you're after isn't here — let's get you back to something useful.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a class="btn btn--lg" href="index.html">Back to home <span class="arr">→</span></a>
+      <a class="btn btn--ghost-light btn--lg" href="contact.html">Contact us</a>
+    </div>
+  </div>
+</section>
+<script src="main.js"></script>
+</body>
+</html>
