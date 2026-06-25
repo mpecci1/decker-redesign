@@ -651,7 +651,7 @@ catalog = (
     + header("catalog.html")
     + page_hero("Catalog", "Catalog",
                "The whole Decker catalog.",
-               "Every product below is pulled straight from deckertape.com — 1,200+ tapes, printed tapes, handles, pads and labels. Search by name or part number, filter by line, then send us what you need for a quote.")
+               "Our full range — 1,200+ tapes, printed tapes, handles, pads and labels. Search by name or part number, filter by line, then send us what you need for a quote.")
     + """<section class="section">
   <div class="wrap">
     <div class="catalog-controls reveal">
@@ -661,7 +661,7 @@ catalog = (
     </div>
     <div class="catalog-grid" id="cat-grid"></div>
     <div class="center" style="margin-top:2.5rem;"><button class="btn btn--ghost" id="cat-more" hidden>Show more products</button></div>
-    <p class="catalog-note mono">Product data pulled live from deckertape.com. Pricing and ordering are handled by Decker — <a href="contact.html">request a quote</a> or call <a href="tel:18002275252">(800) 227-5252</a>.</p>
+    <p class="catalog-note mono">Need pricing or ready to order? Send us the part numbers and we'll get you a quote — <a href="contact.html">request a quote</a> or call <a href="tel:18002275252">(800) 227-5252</a>.</p>
   </div>
 </section>
 """
